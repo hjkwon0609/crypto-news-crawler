@@ -15,12 +15,14 @@ if __name__ == '__main__':
         for line in f.readlines():
             try:
                 doc = json.loads(line)
-                documents.append(doc)
-                corpus.append(doc['content'])
+                if 'content' in doc and 'title' in doc:
+                    documents.append(doc)
+                    corpus.append(doc['content'])
             except:
                 pass
 
     keywords = tf_idf.get_keywords(corpus, 3)
+
     for i in xrange(len(documents)):
         documents[i]['keywords'] = keywords[i]
 
