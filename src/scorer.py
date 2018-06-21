@@ -47,7 +47,8 @@ class Scorer(object):
 			(1 + handle_followers / 100000) * 
 			(1 + favorites / 1000) * 
 			(1 + retweets / 100000) * 
-			(1 + 0.2 * (doc_url in tweet_urls))
+			(1 + 0.2 * (doc_url in tweet_urls)) *
+			(1 + 0.5 * (title in tweet_text))
 		"""
 		tweet_text = tweet['text']
 		tweet_urls = set(url['expanded_url'] for url in tweet['entities']['urls'])
@@ -64,10 +65,17 @@ class Scorer(object):
 			(1 + handle_followers / 100000) * \
 			(1 + favorites / 1000) * \
 			(1 + retweets / 100000) * \
-			(1 + 0.2 * (doc.url in tweet_urls))
+			(1 + 0.2 * (doc.url in tweet_urls)) * \
+			(1 + 0.5 * (1 if re.finditer(doc.title, tweet['text']) else 0))
 
 		return score
 
 if __name__ == '__main__':
 	scorer = Scorer()
-	print scorer.score_document(Document())
+	print scorer.score_document(Document(
+		'test title',
+		'do you know what i am saying huh?, a, a, the',
+		['saying', 'know'],
+		datetime_parse('Thu Jun 21 12:30:03 +0000 2018'),
+		'https://www.google.com'
+	))
