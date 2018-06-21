@@ -83,6 +83,6 @@ class TwitterApi(object):
 
 if __name__ == '__main__':
 	api = TwitterApi()
-	resp = api.get_keyword_tweets(['https://www.google.com'])
-	result = resp.json()
+	resp = api.get_keyword_tweets(['bitcoin', '2014'])
+	result = resp
 	print result

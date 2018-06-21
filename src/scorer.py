@@ -33,9 +33,9 @@ class Scorer(object):
 				if last_created_date < doc.created_at:
 					return score
 
-			if max_id == None:
-				return 0
-				
+			if len(results) == 0:
+				return score
+
 			max_id -= 1
 			time.sleep(4)  # rate limit 450 per 30 minutes 
 
