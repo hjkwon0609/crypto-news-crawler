@@ -1,6 +1,8 @@
 #
 # This script can be executed like the command below.
-# $ scrapy runspider coindesk-spider.py
+#
+# $ cat urls.txt | parallel --no-notice --jobs 3 -X -n 1 COINDESK_SPIDER_START_URL='{}' scrapy runspider -t jsonlines -o output/`date +%Y-%m-%d_%H:%M:%S`.jsonl coindesk-spider.py
+#
 import os
 import re
 import time
