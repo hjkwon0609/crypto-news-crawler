@@ -62,7 +62,7 @@ class TwitterApi(object):
 		method = 'GET'
 		endpoint = '/search/tweets.json'
 		params = {
-			'q': ' OR '.join(keywords),
+			'q': ' '.join(keywords),
 			'result_type': 'recent',
 			'count': '100'
 		}
@@ -84,6 +84,6 @@ class TwitterApi(object):
 
 if __name__ == '__main__':
 	api = TwitterApi()
-	resp = api.get_keyword_tweets(['bitcoin', '2014'])
+	resp = api.get_keyword_tweets(['bitcoin', '2014', 'dfsafdafdsa'])
 	result = resp
 	print result
