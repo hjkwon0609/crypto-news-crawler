@@ -62,7 +62,7 @@ class TwitterApi(object):
 		method = 'GET'
 		endpoint = '/search/tweets.json'
 		params = {
-			'q': ' '.join(keywords),
+			'q': ' OR '.join(keywords),
 			'result_type': 'recent',
 			'count': '100'
 		}
