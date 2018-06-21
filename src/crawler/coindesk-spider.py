@@ -80,14 +80,15 @@ class CoindeskSpider(scrapy.Spider):
         for post in soup.select('div.post-info'):
             title = post.select('h3 > a')[0]
             title_text = title.text
-            content = self._extract_content(title['href'])
+            title_link = title['href']
+            content = self._extract_content(title_link)
 
             datetime_str = post.findChild('time')['datetime']
             dt = dateutil.parser.parse(datetime_str)
             ts = int(dt.strftime('%s'))
             ts_oldest = min(ts_oldest, ts)
 
-            yield {'title': title_text, 'date': datetime_str, 'content': content}
+            yield {'url': title_link, 'title': title_text, 'date': datetime_str, 'content': content}
 
         #if time.time() - ts_oldest < 60 * 60 * 3:  # 3 hours ago
         if time.time() - ts_oldest < 60 * 60 * 24 * 30:  # 1 month ago

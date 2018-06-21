@@ -66,6 +66,7 @@ class TwitterApi(object):
 			'result_type': 'recent',
 			'count': '100'
 		}
+                print 'q: {}'.format(keywords)
 		if max_id:
 			params.update({'max_id': max_id})
 
