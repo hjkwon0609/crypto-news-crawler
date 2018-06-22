@@ -8,9 +8,6 @@ import re
 import time
 import dateutil.parser
 
-from twisted.internet.defer import inlineCallbacks, returnValue
-import treq
-
 import scrapy
 import requests
 from bs4 import BeautifulSoup
@@ -58,15 +55,6 @@ class CoindeskSpider(scrapy.Spider):
         if 'COINDESK_SPIDER_START_URL' not in os.environ:
             raise Exception('COINDESK_SPIDER_START_URL not defined!')
         self.start_urls.append(os.environ['COINDESK_SPIDER_START_URL'])
-
-    # NOT WORKING FOR NOW
-    @inlineCallbacks
-    def _extract_content_async(self, url):
-        resp = yield treq.get(url)
-        resp_text = yield resp.text()
-        soup = BeautifulSoup(resp_text)
-        content = soup.select('div.article-content-container')[0].text
-        returnValue(content)
 
     def _extract_content(self, url):
         resp = requests.get(url)
