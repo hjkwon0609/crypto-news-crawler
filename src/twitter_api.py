@@ -11,6 +11,7 @@ from urllib import urlencode, quote
 class TwitterApi(object):
 	def __init__(self):
 		self.host = 'https://api.twitter.com/1.1'
+    # examples of consumer keys -- now revoked
 		self.consumer_key = 'KxuWAmRiIAvJq1zU0PxlxQRs3'
 		self.consumer_secret = 'L29O19yNXNAFoP2A20drMzWUjlNgXAFTOeuFNknuEsFYewnUmL'
 		self.token = '157319880-RziVIx4UUui1YNn1jxEGpQeM533Fm3hDsC0gD329'
